@@ -1,10 +1,10 @@
-interface Car {
+export interface Car {
     id: number;
     size: string;
     parkTime?: number;
 }
 
-interface ParkingSlot {
+export interface ParkingSlot {
     id: number;
     size: string;
     isAvailable: boolean;

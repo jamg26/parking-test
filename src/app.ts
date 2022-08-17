@@ -1,7 +1,7 @@
 
 import { printTable } from 'console-table-printer';
 import prompts from 'prompts'
-import ParkingClass from './parkingClass'
+import ParkingClass, { ParkingSlot } from './parkingClass'
 
 const parking = new ParkingClass();
 
@@ -27,7 +27,7 @@ function prompt() {
         switch(response.value) {
             case 'GET_PARKING_SLOTS':
                 const parkingSlots = parking.getParkingSlots().map((slots) => {
-                    return slots.map(slot => {
+                    return slots.map((slot: ParkingSlot) => {
                         return { ...slot, car: slot.car ? `${slot.car?.id} (${slot.car?.size})` : "" }
                     }) 
                 })
