@@ -1,4 +1,5 @@
 
+import { printTable } from 'console-table-printer';
 import prompts from 'prompts'
 import ParkingClass from './parkingClass'
 
@@ -25,7 +26,12 @@ function prompt() {
 
         switch(response.value) {
             case 'GET_PARKING_SLOTS':
-                console.log(parking.getParkingSlots().map((slot) => console.log(slot)))
+                const parkingSlots = parking.getParkingSlots().map((slots) => {
+                    return slots.map(slot => {
+                        return { ...slot, car: slot.car ? `${slot.car?.id} (${slot.car?.size})` : "" }
+                    }) 
+                })
+                parkingSlots.map(slots => printTable(slots))
                 break;
             case 'PARK_CAR':
                 const parkReponse = await prompts({
@@ -33,9 +39,9 @@ function prompt() {
                     name: 'value',
                     message: 'Select Car Size',
                     choices: [
-                        { title: 'Small', description: 'Rate: 40 + 20.00/hour.', value: 'SP' },
-                        { title: 'Medium', description: 'Rate: 40 + 60.00/hour.', value: 'MP' },
-                        { title: 'Large', description: 'Rate: 40 + 100.00/hour.', value: 'LP' },
+                        { title: 'Small', description: 'Rate: 40 + 20.00/hour.', value: 'S' },
+                        { title: 'Medium', description: 'Rate: 40 + 60.00/hour.', value: 'M' },
+                        { title: 'Large', description: 'Rate: 40 + 100.00/hour.', value: 'L' },
                         { title: 'Cancel', value: 'CANCEL' }
                     ],
                 }, { onCancel: onCancel });
@@ -51,14 +57,14 @@ function prompt() {
                 const carSize = parkReponse.value;
 
                 switch(parkReponse.value) {
-                    case 'SP':
-                        parking.parkCar(generatedCar, parking.getParkingSlots()[carSize === 'SP' ? 0 : carSize === 'MP' ? 1 : 2])
+                    case 'S':
+                        parking.parkCar(generatedCar, parking.getParkingSlots()[carSize === 'S' ? 0 : carSize === 'M' ? 1 : 2])
                         break;
-                    case 'MP':
-                        parking.parkCar(generatedCar, parking.getParkingSlots()[carSize === 'SP' ? 0 : carSize === 'MP' ? 1 : 2])
+                    case 'M':
+                        parking.parkCar(generatedCar, parking.getParkingSlots()[carSize === 'S' ? 0 : carSize === 'M' ? 1 : 2])
                         break;
-                    case 'LP':
-                        parking.parkCar(generatedCar, parking.getParkingSlots()[carSize === 'SP' ? 0 : carSize === 'MP' ? 1 : 2])
+                    case 'L':
+                        parking.parkCar(generatedCar, parking.getParkingSlots()[carSize === 'S' ? 0 : carSize === 'M' ? 1 : 2])
                         break;
                     default:
                         break

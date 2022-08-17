@@ -82,10 +82,10 @@ export default class Parking {
             parkSlot.isAvailable = false;
             parkSlot.car = car;
             parkSlot.car.parkTime = this.virtualTime
-            console.log('Car Parked Successfully');
+            console.log("\x1b[32m", 'Car Parked Successfully');
             return true;
         } else {
-            if(car.size === 'SP') { 
+            if(car.size === 'S') { 
                 const hasMPAvailable = parkingSlots[1].some((slot: ParkingSlot) => slot.isAvailable === true);
                 const hasLPAvailable = parkingSlots[2].some((slot: ParkingSlot) => slot.isAvailable === true);
 
@@ -100,7 +100,7 @@ export default class Parking {
                 }
             }
 
-            if(car.size === 'MP') {
+            if(car.size === 'M') {
                 const hasLPAvailable = parkingSlots[2].some((slot: ParkingSlot) => slot.isAvailable === true);
 
                 if(hasLPAvailable) {
@@ -110,7 +110,7 @@ export default class Parking {
             }
 
             
-            console.log('No Parking Slots Available');
+            console.log("\x1b[31m", 'No Parking Slots Available');
             return false;
         }
     }
@@ -123,10 +123,10 @@ export default class Parking {
             parkSlot.isAvailable = true;
             parkSlot.car = null;
             delete parkSlot.car
-            console.log('Car Unparked Successfully');
+            console.log("\x1b[32m", 'Car Unparked Successfully');
             return true;
         } else {
-            console.log('Car not found');
+            console.log("\x1b[31m", 'Car not found');
             return false;
         }
     }
@@ -140,8 +140,8 @@ export default class Parking {
         } else {
             parkFee = 40 + (parkHours * parkSlot.ratePerHour)
         }
-        console.log('Park Time (hours):', parkHours)
-        console.log('Park Fee:', parkFee.toFixed(2))
+        console.log("\x1b[36m", 'Park Time (hours):', parkHours)
+        console.log("\x1b[36m", 'Park Fee:', parkFee.toFixed(2))
     }
 
 
