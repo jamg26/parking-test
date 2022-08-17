@@ -21,9 +21,10 @@ export default class Parking {
     parkingSlots = [];
     virtualTime = 0
 
-    // 60 - minute
-    // 3600 - 1 sec = 1 hour
-    // 3600 * 24 = 1 sec - 1 day
+    // define the speed of time for testing
+    // 60 -              1 seconds = 1 seconds
+    // 3600 -            1 seconds = 1 hour
+    // 3600 * 24 -       1 seconds = 1 day
     virtualTimeMultiplier = 3600; 
 
     parkingEntrance = [[0,0], [1,0], [2,0]]
